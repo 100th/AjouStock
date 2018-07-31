@@ -69,6 +69,17 @@ class MakeData:
         f.close()
 
 
+    def load_buy_list(self):
+        f = open("/Users/B-dragon90/Desktop/Github/AjouStock/data/buy_list.txt", 'rt')
+        buy_list = f.readlines()
+        f.close()
+        code_list = []
+        for item in buy_list:
+            split_row_data = item.split(';')
+            code_list.append(split_row_data[1])
+        return code_list
+
+
     # 매도 구현
     # def update_sell_list(self, sell_list):
     #     f = open("sell_list.txt", "wt")
@@ -84,9 +95,10 @@ class MakeData:
         for i, code in enumerate(self.kosdaq_codes):
             print(i, '/', num)
             if self.check_skyrocket(code):
-                #print("급등주: ", code)
-                #print("급등주: %s, %s" % (code, self.kiwoom.get_master_code_name(code)))
+                # print("급등주: ", code)
+                # print("급등주: %s, %s" % (code, self.kiwoom.get_master_code_name(code)))
                 buy_list.append(code)
+                # return code
 
         self.update_buy_list(buy_list)
 
