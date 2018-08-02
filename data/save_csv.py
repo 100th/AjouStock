@@ -6,11 +6,18 @@ import traceback
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup as bs
-from make_data_test import MakeDataTest
 
 
-make = MakeDataTest()
-code_list = make.load_buy_list()
+# buy_list.txt 불러와서 어떤 종목을 매매할지 code_list로 만듦
+def load_buy_list():
+    f = open("/Users/B-dragon90/Desktop/Github/AjouStock/data/buy_list.txt", 'rt')
+    buy_list = f.readlines()
+    f.close()
+    code_list = []
+    for item in buy_list:
+        split_row_data = item.split(';')
+        code_list.append(split_row_data[1])
+    return code_list
 
 
 # Parsing 함수
@@ -29,6 +36,7 @@ def parsing(code, page):
 
 
 # 데이터 Parsing
+code_list = load_buy_list()
 for i in range(len(code_list)):
     code = code_list[i]
     url = 'http://finance.naver.com/item/sise_day.nhn?code={code}'.format(code=code)
