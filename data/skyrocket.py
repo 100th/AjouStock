@@ -12,12 +12,14 @@ code_df = pd.read_html('http://kind.krx.co.kr/corpgeneral/corpList.do?method=dow
 code_df.종목코드 = code_df.종목코드.map('{:06d}'.format)
 code_df = code_df[['회사명', '종목코드']]
 code_df = code_df.rename(columns={'회사명': 'name', '종목코드': 'code'})
-df_head = code_df
+df_head = code_df.head(3)
+
 
 code_list=[]
 for i in range(len(df_head)):
     code = df_head.loc[i].code
     code_list.append(code)
+
 
 class Skyrocket:
     def parsing(self, code, page):
@@ -107,15 +109,26 @@ class Skyrocket:
         for i, code in enumerate(code_list):
             print(i, '/', num)
             if self.check_skyrocket(df_21, code_list):
-                print(code_list[i], "is Skyrocket!!!!!!!!!!!!!")
+                print(code_list[i], "is SKYROCKET!!!!!!!!!!!!!!!!!!")
+                buy_list.append(code_list[i])
             else:
                 print(code_list[i], "is nothing.")
-                # print("급등주: %s, %s" % (code, self.kiwoom.get_master_code_name(code)))
-                # buy_list.append(code)
-                # return code
 
-        # self.update_buy_list(buy_list)
+        self.update_buy_list(buy_list)
 
+
+    def update_buy_list(self, buy_list):
+        f = open("buy_list.txt", "wt")
+        for code in buy_list:
+            f.writelines("매수;"+ code + ";시장가;10;0;매수전\n")   # 개수는 수정해야 함
+        f.close()
+
+
+    def update_sell_list(self, sell_list):
+        f = open("sell_list.txt", "wt")
+        for code in sell_list:
+            f.writelines("매도;"+ code + ";시장가;10;0;매도전\n")
+        f.close()
 
 
 if __name__ == "__main__":
@@ -124,30 +137,14 @@ if __name__ == "__main__":
     sky.run(df_21, code_list)
 
 
-
+"""
+* 급등주 포착 알고리즘
+특정 거래일의 거래량이 이전 시점의 평균 거래량보다 1000% 이상 급증하는 종목을 매수
+'이전 시점의 평균 거래량'을 특정 거래일 이전의 20일(거래일 기준) 동안의 평균 거래량으로 정의
+'거래량 급증'은 특정 거래일의 거래량이 평균 거래량보다 1000% 초과일 때 급등한 것으로 정의
+"""
 
 # sk = Skyrocket()
 # df_21 = sk.get_volume_df(code_list)
 # sk.check_skyrocket(df_21, code_list)
 # sk.run(df_21, code_list)
-
-
-
-"""
-    def update_buy_list(buy_list):
-        f = open("buy_list.txt", "wt")
-        for code in buy_list:
-            f.writelines("매수;"+ code + ";시장가;10;0;매수전\n")   # 개수는 수정해야 함
-        f.close()
-
-
-    def load_buy_list():
-        f = open("/Users/B-dragon90/Desktop/Github/AjouStock/data/buy_list.txt", 'rt')
-        buy_list = f.readlines()
-        f.close()
-        code_list = []
-        for item in buy_list:
-            split_row_data = item.split(';')
-            code_list.append(split_row_data[1])
-        return code_list
-"""
