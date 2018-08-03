@@ -1,0 +1,15 @@
+LR: 0.001, DF: 0, TU: [1, 2], DRT: 0.2
+findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=12.0 to DejaVu Sans ('C:\\Users\\B-dragon90\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000
+findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=10.0 to DejaVu Sans ('C:\\Users\\B-dragon90\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000
+findfont: Matching :family=sans-serif:style=normal:variant=normal:weight=normal:stretch=normal:size=20.0 to DejaVu Sans ('C:\\Users\\B-dragon90\\AppData\\Local\\Programs\\Python\\Python36\\lib\\site-packages\\matplotlib\\mpl-data\\fonts\\ttf\\DejaVuSans.ttf') with score of 0.050000
+[Epoch 01/10]	Epsilon:0.5000	#Expl.:14/27	#Buy:19	#Sell:8	#Hold:0	#Stocks:11	PV:₩10,002,994	POS:0	NEG:0	Loss:  0.000000
+[Epoch 02/10]	Epsilon:0.4444	#Expl.:13/27	#Buy:20	#Sell:7	#Hold:0	#Stocks:13	PV:₩9,994,429	POS:0	NEG:0	Loss:  0.000000
+[Epoch 03/10]	Epsilon:0.3889	#Expl.:6/27	#Buy:23	#Sell:3	#Hold:1	#Stocks:20	PV:₩9,970,168	POS:0	NEG:0	Loss:  0.000000
+[Epoch 04/10]	Epsilon:0.3333	#Expl.:12/27	#Buy:21	#Sell:6	#Hold:0	#Stocks:15	PV:₩9,998,845	POS:0	NEG:0	Loss:  0.000000
+[Epoch 05/10]	Epsilon:0.2778	#Expl.:10/27	#Buy:21	#Sell:6	#Hold:0	#Stocks:15	PV:₩9,996,848	POS:0	NEG:0	Loss:  0.000000
+[Epoch 06/10]	Epsilon:0.2222	#Expl.:6/27	#Buy:23	#Sell:3	#Hold:1	#Stocks:20	PV:₩9,981,152	POS:0	NEG:0	Loss:  0.000000
+[Epoch 07/10]	Epsilon:0.1667	#Expl.:5/27	#Buy:24	#Sell:3	#Hold:0	#Stocks:21	PV:₩9,967,159	POS:0	NEG:0	Loss:  0.000000
+[Epoch 08/10]	Epsilon:0.1111	#Expl.:5/27	#Buy:23	#Sell:4	#Hold:0	#Stocks:19	PV:₩9,982,713	POS:0	NEG:0	Loss:  0.000000
+[Epoch 09/10]	Epsilon:0.0556	#Expl.:0/27	#Buy:25	#Sell:2	#Hold:0	#Stocks:23	PV:₩9,977,565	POS:0	NEG:0	Loss:  0.000000
+[Epoch 10/10]	Epsilon:0.0000	#Expl.:0/27	#Buy:25	#Sell:2	#Hold:0	#Stocks:23	PV:₩9,977,565	POS:0	NEG:0	Loss:  0.000000
+Max PV: ₩10,002,994, 	 # Win: 1

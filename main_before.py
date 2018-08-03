@@ -4,6 +4,7 @@
 import os
 import logging
 import settings
+import datetime
 from data import data_management, save_csv
 from learner import Learner
 
@@ -64,13 +65,14 @@ if __name__ == '__main__':
             lr=.001)                            # 학습 속도
 
         learner.fit(balance=10000000,            # 초기 자본금
-               num_epoches=100,                 # 수행할 Epoch 수
+               num_epoches=10,                 # 수행할 Epoch 수
                discount_factor=0,                # 할인 요인
                start_epsilon=.5)                 # 초기 탐험률
 
         # 정책 신경망을 파일로 저장
+        date = datetime.datetime.strftime(datetime.datetime.today(), '%Y%m%d')
         model_dir = os.path.join(settings.BASE_DIR, 'result/models/%s' % stock_code)
         if not os.path.isdir(model_dir):
             os.makedirs(model_dir)
-        model_path = os.path.join(model_dir, 'model_%s.h5' % timestr)
+        model_path = os.path.join(model_dir, 'model_%s.h5' % date)
         learner.network.save_model(model_path)
