@@ -9,11 +9,11 @@ from learner import Learner
 
 
 if __name__ == '__main__':
-    stock_code = '000810'           # 삼성화재
-    model_ver = '20180202000545'    # 정책 신경망 모델의 버전명 직접 지정
+    stock_code = '001040'
+    model_ver = '20180803154237'
 
     # 로그 기록
-    log_dir = os.path.join(settings.BASE_DIR, 'logs/%s' % stock_code)
+    log_dir = os.path.join(settings.BASE_DIR, 'result/logs/%s' % stock_code)
     timestr = settings.get_time_str()
     file_handler = logging.FileHandler(filename=os.path.join(
         log_dir, "%s_%s.log" % (stock_code, timestr)), encoding='utf-8')
@@ -25,13 +25,13 @@ if __name__ == '__main__':
 
     # 데이터 준비
     chart_data = data_management.load_chart_data(
-        os.path.join(settings.BASE_DIR, 'data/chart_data/{}.csv'.format(stock_code)))
+        os.path.join(settings.BASE_DIR, 'data/csv_data/{}.csv'.format(stock_code)))
     prep_data = data_management.preprocess(chart_data)
     training_data = data_management.build_training_data(prep_data)
 
     # 기간 필터링
-    training_data = training_data[(training_data['date'] >= '2018-01-01') &
-                                  (training_data['date'] <= '2018-01-31')]
+    training_data = training_data[(training_data['date'] >= '2018-01-02') &
+                                  (training_data['date'] <= '2018-08-03')]
     training_data = training_data.dropna()
 
     # 차트 데이터 분리
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     training_data = training_data[features_training_data]
 
     # 비 학습 투자 시뮬레이션 시작
-    policy_learner = Learner(
+    learner = Learner(
         stock_code=stock_code,          # 종목 코드
         chart_data=chart_data,          # 차트 데이터
         training_data=training_data,    # 학습 데이터
@@ -58,6 +58,6 @@ if __name__ == '__main__':
         max_trading_unit=3)             # 최대 투자 단위
 
     # fit()이 아니라 trade() 함수 호출
-    Learner.trade(balance=10000000,
+    learner.trade(balance=10000000,
                          model_path=os.path.join(settings.BASE_DIR,
-                         'models/{}/model_{}.h5'.format(stock_code, model_ver)))
+                         'result/models/{}/model_{}.h5'.format(stock_code, model_ver)))

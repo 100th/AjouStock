@@ -58,7 +58,7 @@ class Agent:
 
     def get_states(self):   # Agent 상태 획득 (주식 보유 비율, 포트폴리오 가치 비율)
         self.ratio_hold = self.num_stocks / int(self.portfolio_value / self.environment.get_price())
-        self.ratio_portfolio_value = self.portfolio_value / self.initial_balance
+        self.ratio_portfolio_value = self.portfolio_value / self.base_portfolio_value
         return (self.ratio_hold, self.ratio_portfolio_value)
 
 
