@@ -3,8 +3,8 @@
 # 저장된 정책 신경망 모델을 불러와서 실행
 import os
 import logging
+import settings
 from data import data_management
-from learning import settings
 from learner import Learner
 
 
@@ -58,6 +58,6 @@ if __name__ == '__main__':
         max_trading_unit=3)             # 최대 투자 단위
 
     # fit()이 아니라 trade() 함수 호출
-    policy_learner.trade(balance=10000000,
+    Learner.trade(balance=10000000,
                          model_path=os.path.join(settings.BASE_DIR,
                          'models/{}/model_{}.h5'.format(stock_code, model_ver)))

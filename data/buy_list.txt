@@ -1,2 +1,1 @@
-buy;005930;market;10;0;before
-buy;066570;market;10;0;before
+매수;001040;시장가;10;0;매수전

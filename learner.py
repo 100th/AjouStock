@@ -4,8 +4,11 @@ import os
 import locale   # 통화(currency) 문자열 포맷
 import logging  # 학습 과정 중에 정보 기록
 import numpy as np
-from learning import settings, environment, agent, network, visualizer
-
+import settings
+from learning.agent import Agent
+from learning.environment import Environment
+from learning.network import Network
+from learning.visualizer import Visualizer
 
 logger = logging.getLogger(__name__)
 locale.setlocale(locale.LC_ALL, 'ko_KR.UTF-8')
@@ -60,7 +63,7 @@ class Learner:
 
         # Visualizer 결과 저장 폴더 준비
         epoch_summary_dir = os.path.join(
-            settings.BASE_DIR, 'epoch_summary/%s/epoch_summary_%s' % (
+            settings.BASE_DIR, 'result/epoch_summary/%s/epoch_summary_%s' % (
                 self.stock_code, settings.timestr))
         if not os.path.isdir(epoch_summary_dir):
             os.makedirs(epoch_summary_dir)
@@ -227,6 +230,7 @@ class Learner:
         return None
 
 
+# -----------------------------------------------------------------------------------------
     # 학습된 정책 신경망 모델로 주식투자 시뮬레이션 진행
     def trade(self, model_path=None, balance=2000000):
         if model_path is None:

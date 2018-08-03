@@ -1,6 +1,5 @@
 # /data/data_management.py
 # chart_data와 training_data를 생성하는 모듈
-from . import make_data
 import pandas as pd
 import numpy as np
 

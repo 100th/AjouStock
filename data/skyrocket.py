@@ -13,7 +13,7 @@ df_code.종목코드 = df_code.종목코드.map('{:06d}'.format)
 df_code = df_code[['회사명', '종목코드']]
 df_code = df_code.rename(columns={'회사명': 'name', '종목코드': 'code'})
 # len(df_code)      # 2018.8.2. 기준 2211개
-df_extract = df_code.loc[:2]
+df_extract = df_code.loc[:5]
 
 
 code_list=[]
@@ -23,7 +23,6 @@ for i in range(len(df_extract)):
 
 
 class Skyrocket:
-    
     # Parsing 함수
     def parsing(self, code, page):
         try:
@@ -131,18 +130,18 @@ class Skyrocket:
 
     # buy_list 업데이트 함수
     def update_buy_list(self, buy_list):
-        f = open("buy_list.txt", "wt")
+        f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/buy_list.txt", "wt")
         for code in buy_list:
             f.writelines("매수;"+ code + ";시장가;10;0;매수전\n")   # 개수는 수정해야 함
         f.close()
 
 
     # sell_list 업데이트 함수 (아직 작동하지 않음)
-    def update_sell_list(self, sell_list):
-        f = open("sell_list.txt", "wt")
-        for code in sell_list:
-            f.writelines("매도;"+ code + ";시장가;10;0;매도전\n")
-        f.close()
+    # def update_sell_list(self, sell_list):
+    #     f = open("sell_list.txt", "wt")
+    #     for code in sell_list:
+    #         f.writelines("매도;"+ code + ";시장가;10;0;매도전\n")
+    #     f.close()
 
 
 if __name__ == "__main__":

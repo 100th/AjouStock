@@ -33,7 +33,7 @@ class Visualizer:
             action_list=None, actions=None, num_stocks=None,
             outvals=None, exps=None, learning=None,
             initial_balance=None, pvs=None):
-        x = np.arange(len(num_stocks))  # 모든 차트가 공유할 x축 데이터
+        x = np.arange(len(actions))  # 모든 차트가 공유할 x축 데이터
         actions = np.array(actions)  # 에이전트의 행동 (차트2)
         outvals = np.array(outvals)  # 정책 신경망의 출력 (차트3)
         pvs_base = np.zeros(len(actions)) + initial_balance  # 초기 자본금 (차트4)
