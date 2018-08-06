@@ -18,8 +18,8 @@ if __name__ == '__main__':
         # 로그 기록
         log_dir = os.path.join(settings.BASE_DIR, 'result/logs/%s' % stock_code)
         timestr = settings.get_time_str()
-        if not os.path.exists('result/logs/%s' % stock_code):
-            os.makedirs('result/logs/%s' % stock_code)
+        if not os.path.isdir(log_dir):
+            os.makedirs(log_dir)
         file_handler = logging.FileHandler(filename=os.path.join(
             log_dir, "%s_%s.log" % (stock_code, timestr)), encoding='utf-8')
         stream_handler = logging.StreamHandler()
@@ -35,7 +35,7 @@ if __name__ == '__main__':
         training_data = data_management.build_training_data(prep_data)
 
         # 기간 필터링
-        training_data = training_data[(training_data['date'] >= '2018-01-02') &
+        training_data = training_data[(training_data['date'] >= '2017-01-02') &
                                       (training_data['date'] <= '2018-08-03')]
         training_data = training_data.dropna()
 
@@ -65,7 +65,7 @@ if __name__ == '__main__':
             lr=.001)                            # 학습 속도
 
         learner.fit(balance=10000000,            # 초기 자본금
-               num_epoches=10,                 # 수행할 Epoch 수
+               num_epoches=100,                 # 수행할 Epoch 수
                discount_factor=0,                # 할인 요인
                start_epsilon=.5)                 # 초기 탐험률
 
