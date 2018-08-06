@@ -13,8 +13,7 @@ df_code.종목코드 = df_code.종목코드.map('{:06d}'.format)
 df_code = df_code[['회사명', '종목코드']]
 df_code = df_code.rename(columns={'회사명': 'name', '종목코드': 'code'})
 # len(df_code)      # 2018.8.2. 기준 2211개
-df_extract = df_code.loc[:5]
-
+df_extract = df_code.iloc[100:110,:]
 
 code_list=[]
 for i in range(len(df_extract)):
