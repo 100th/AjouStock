@@ -111,7 +111,7 @@ class Skyrocket:
 
     # 실행하는 함수
     def run(self, code_list):
-        buy_list = []
+        skyrocket_list = []
         num = len(code_list)
 
         for i in range(num): # enumerate(code_list)
@@ -120,18 +120,18 @@ class Skyrocket:
             print(i, '/', num)
             if self.check_skyrocket(df_21, code):
                 print(code, "<------------- SKYROCKET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                buy_list.append(code)
+                skyrocket_list.append(code)
             else:
                 print(code, "<------------- nothing.")
 
-        self.update_buy_list(buy_list)
+        self.update_skyrocket_list(skyrocket_list)
 
 
-    # buy_list 업데이트 함수
-    def update_buy_list(self, buy_list):
-        f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/buy_list.txt", "wt")
-        for code in buy_list:
-            f.writelines("매수;"+ code + ";시장가;10;0;매수전\n")   # 개수는 수정해야 함
+    # update_skyrocket_list 업데이트 함수
+    def update_skyrocket_list(self, skyrocket_list):
+        f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/skyrocket_list.txt", "wt")
+        for code in skyrocket_list:
+            f.writelines("skyrocket;" + code + "\n")   # 개수는 수정해야 함
         f.close()
 
 

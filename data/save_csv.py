@@ -8,13 +8,13 @@ import pandas as pd
 from bs4 import BeautifulSoup as bs
 
 
-# buy_list.txt 불러와서 어떤 종목을 매매할지 code_list로 만듦
-def load_buy_list():
-    f = open("/Users/B-dragon90/Desktop/Github/AjouStock/data/buy_list.txt", 'rt')
-    buy_list = f.readlines()
+# skyrocket_list.txt 불러와서 어떤 종목을 매매할지 code_list로 만듦
+def load_skyrocket_list():
+    f = open("/Users/B-dragon90/Desktop/Github/AjouStock/data/skyrocket_list.txt", 'rt')
+    skyrocket_list = f.readlines()
     f.close()
     code_list = []
-    for item in buy_list:
+    for item in skyrocket_list:
         split_row_data = item.split(';')
         code_list.append(split_row_data[1])
     return code_list
@@ -36,7 +36,7 @@ def parsing(code, page):
 
 
 # 데이터 Parsing
-code_list = load_buy_list()
+code_list = load_skyrocket_list()
 for i in range(len(code_list)):
     code = code_list[i]
     url = 'http://finance.naver.com/item/sise_day.nhn?code={code}'.format(code=code)
