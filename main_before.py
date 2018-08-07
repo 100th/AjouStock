@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
         # 기간 필터링
         training_data = training_data[(training_data['date'] >= '2017-01-02') &
-                                      (training_data['date'] <= '2018-08-03')]
+                                      (training_data['date'] <= '2018-03-01')]
         training_data = training_data.dropna()
 
         # 차트 데이터 분리
@@ -65,7 +65,7 @@ if __name__ == '__main__':
             lr=.001)                            # 학습 속도
 
         learner.fit(balance=10000000,            # 초기 자본금
-               num_epoches=100,                 # 수행할 Epoch 수
+               num_epoches=30,                 # 수행할 Epoch 수
                discount_factor=0,                # 할인 요인
                start_epsilon=.5)                 # 초기 탐험률
 

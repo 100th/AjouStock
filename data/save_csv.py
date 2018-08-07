@@ -51,7 +51,7 @@ for i in range(len(code_list)):
     pg_last = int(pg_last)
 
     # 시작일과 종료일
-    start_date = datetime.datetime.strftime(datetime.datetime(year=2018, month=1, day=1), '%Y.%m.%d')
+    start_date = datetime.datetime.strftime(datetime.datetime(year=2017, month=1, day=1), '%Y.%m.%d')
     end_date = datetime.datetime.strftime(datetime.datetime.today(), '%Y.%m.%d')
 
     # 페이지 확인
