@@ -135,14 +135,6 @@ class Skyrocket:
         f.close()
 
 
-    # sell_list 업데이트 함수 (아직 작동하지 않음)
-    # def update_sell_list(self, sell_list):
-    #     f = open("sell_list.txt", "wt")
-    #     for code in sell_list:
-    #         f.writelines("매도;"+ code + ";시장가;10;0;매도전\n")
-    #     f.close()
-
-
 if __name__ == "__main__":
     sky = Skyrocket()
     sky.run(code_list)
