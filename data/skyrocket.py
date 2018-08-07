@@ -129,7 +129,7 @@ class Skyrocket:
 
     # update_skyrocket_list 업데이트 함수
     def update_skyrocket_list(self, skyrocket_list):
-        f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/skyrocket_list.txt", "wt")
+        f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/list/skyrocket_list.txt", "wt")
         for code in skyrocket_list:
             f.writelines("skyrocket;" + code + "\n")   # 개수는 수정해야 함
         f.close()

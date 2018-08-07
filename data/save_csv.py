@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup as bs
 
 # skyrocket_list.txt 불러와서 어떤 종목을 매매할지 code_list로 만듦
 def load_skyrocket_list():
-    f = open("/Users/B-dragon90/Desktop/Github/AjouStock/data/skyrocket_list.txt", 'rt')
+    f = open("/Users/B-dragon90/Desktop/Github/AjouStock/data/list/skyrocket_list.txt", 'rt')
     skyrocket_list = f.readlines()
     f.close()
     code_list = []
