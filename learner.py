@@ -123,6 +123,19 @@ class Learner:
                 # 결정한 행동을 수행하고, 즉시 보상과 지연 보상 획득.
                 immediate_reward, delayed_reward = self.agent.act(action, confidence)
 
+                min_trading_unit_temp = self.agent.decide_trading_unit(confidence)
+                validity_temp = self.agent.validate_action(action)
+
+                # 맨 마지막 training_data_idx에서 어떤 행동을 해야할지 찾아내기
+                if learning == False and len(self.training_data) == self.training_data_idx + 1:
+                    print("-" * 80)
+                    print("Length of training_data", len(self.training_data))
+                    print("training_data_idx : ", self.training_data_idx)
+                    print("action : ", action)
+                    print("min_trading_unit_temp : ", min_trading_unit_temp)
+                    print("validity_temp : ", validity_temp)
+                    print("-" * 80)
+
                 # 행동과 그 결과를 메모리에 저장
                 # 목적 : (1) 학습에서 배치 학습 데이터로 사용   (2) Visualizer에서 차트 그릴 때 사용
                 memory_sample.append(next_sample)
