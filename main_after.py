@@ -12,6 +12,11 @@ from learner import Learner
 if __name__ == '__main__':
     code_list = save_csv.load_buy_list()
 
+    min_trading_unit_buy_list = []
+    min_trading_unit_sell_list = []
+    code_list_buy = []
+    code_list_sell = []
+
     for i in range(len(code_list)):
         stock_code = code_list[i]
 
@@ -60,9 +65,31 @@ if __name__ == '__main__':
             min_trading_unit=1,             # 최소 투자 단위
             max_trading_unit=3)             # 최대 투자 단위
 
-        # fit()이 아니라 trade() 함수 호출
+        # trade() 함수 호출
         date = datetime.datetime.strftime(datetime.datetime.today(), '%Y%m%d')
         validity, action, min_trading_unit = learner.trade(balance=10000000,
                                                 model_path=os.path.join(settings.BASE_DIR,
                                                 'result/models/{}/model_{}.h5'.format(stock_code, date)))
-        print(" Validity : ", validity, " Action : ", action, " Min_trading_unit : ", min_trading_unit)
+
+        if validity == True:
+            if action == 0:      # 매수
+                min_trading_unit_buy_list.append(min_trading_unit)
+                code_list_buy.append(stock_code)
+
+            elif action == 1:    # 매도
+                min_trading_unit_sell_list.append(min_trading_unit)
+                code_list_sell.append(stock_code)
+
+    # buy_list.txt와 sell_list.txt로 저장
+    b_list = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/buy_list.txt", "wt")
+    for i in range(len(code_list_buy)):
+        b_list.writelines("buy;" + code_list_buy[i] + ";market;" + min_trading_unit_buy_list[i] + ";0;before\n")
+    b_list.close()
+
+    s_list = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/sell_list.txt", "wt")
+    for i in range(len(code_list_sell)):
+        s_list.writelines("sell;" + code_list_sell[i] + ";market;" + min_trading_unit_sell_list[i] + ";0;before\n")
+    s_list.close()
+
+
+# agent의 act 함수 참고하여 행동에 따른 세부 설정 적용하기
