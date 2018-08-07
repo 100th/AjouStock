@@ -62,6 +62,7 @@ if __name__ == '__main__':
 
         # fit()이 아니라 trade() 함수 호출
         date = datetime.datetime.strftime(datetime.datetime.today(), '%Y%m%d')
-        learner.trade(balance=10000000,
-                             model_path=os.path.join(settings.BASE_DIR,
-                             'result/models/{}/model_{}.h5'.format(stock_code, date)))
+        validity, action, min_trading_unit = learner.trade(balance=10000000,
+                                                model_path=os.path.join(settings.BASE_DIR,
+                                                'result/models/{}/model_{}.h5'.format(stock_code, date)))
+        print(" Validity : ", validity, " Action : ", action, " Min_trading_unit : ", min_trading_unit)

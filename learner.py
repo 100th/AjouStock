@@ -131,10 +131,13 @@ class Learner:
                     print("-" * 80)
                     print("Length of training_data", len(self.training_data))
                     print("training_data_idx : ", self.training_data_idx)
-                    print("action : ", action)
-                    print("min_trading_unit_temp : ", min_trading_unit_temp)
                     print("validity_temp : ", validity_temp)
+                    print("action : ", action)
+                    print("confidence : ", confidence)
+                    print("min_trading_unit_temp : ", min_trading_unit_temp)
                     print("-" * 80)
+
+                    return validity_temp, action, min_trading_unit_temp
 
                 # 행동과 그 결과를 메모리에 저장
                 # 목적 : (1) 학습에서 배치 학습 데이터로 사용   (2) Visualizer에서 차트 그릴 때 사용
@@ -249,6 +252,6 @@ class Learner:
         if model_path is None:
             return
         self.network.load_model(model_path=model_path)
-        self.fit(balance=balance, num_epoches=1, learning=False)
-        # 실제로 시뮬레이션을 하기에 num_epoches가 1이며 Learning이 False이다.
-        # 학습을 하지 않고, 저장된 정책 신경망에만 의존하여 진행.
+        validity, action, min_trading_unit = self.fit(balance=balance, num_epoches=1, learning=False)
+
+        return validity, action, min_trading_unit
