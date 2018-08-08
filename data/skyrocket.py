@@ -100,38 +100,44 @@ class Skyrocket:
         if today_vol > avg_vol14 * 10:
             print(today_vol, "<-------------- The volume of TODAY")
             print(int(avg_vol14), "<-------------- The volume of AVERAGE for 14 days")
-            print(round(today_vol / avg_vol14 * 100, 2), "<-------------- %")
-            return True
+            skyrocket_ratio = round(today_vol / avg_vol14 * 100, 2)
+            print(skyrocket_ratio, "<-------------- %")
+            return True, skyrocket_ratio
         else:
             print(today_vol, "<-------------- The volume of TODAY")
             print(int(avg_vol14), "<-------------- The volume of AVERAGE for 14 days")
-            print(round(today_vol / avg_vol14 * 100, 2), "<-------------- %")
-            return False
+            skyrocket_ratio = round(today_vol / avg_vol14 * 100, 2)
+            print(skyrocket_ratio, "<-------------- %")
+            return False, skyrocket_ratio
 
 
     # 실행하는 함수
     def run(self, code_list):
         skyrocket_list = []
+        skyrocket_ratio_list = []
+
         num = len(code_list)
 
         for i in range(num): # enumerate(code_list)
             code = code_list[i]
             df_21 = self.get_volume_df(code)
             print(i, '/', num)
-            if self.check_skyrocket(df_21, code):
+            sky_boolean, skyrocket_ratio = self.check_skyrocket(df_21, code):
+            if sky_boolean == True:
                 print(code, "<------------- SKYROCKET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 skyrocket_list.append(code)
+                skyrocket_ratio_list.append(skyrocket_ratio)
             else:
                 print(code, "<------------- nothing.")
 
-        self.update_skyrocket_list(skyrocket_list)
+        self.update_skyrocket_list(skyrocket_list, skyrocket_ratio_list)
 
 
     # update_skyrocket_list 업데이트 함수
-    def update_skyrocket_list(self, skyrocket_list):
+    def update_skyrocket_list(self, skyrocket_list, skyrocket_ratio_list):
         f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/list/skyrocket_list.txt", "wt")
-        for code in skyrocket_list:
-            f.writelines("skyrocket;" + code + "\n")   # 개수는 수정해야 함
+        for i in range(len(skyrocket_list)):
+            f.writelines(skyrocket_list[i] + ";" + skyrocket_ratio_list[i] + "\n")   # 개수는 수정해야 함
         f.close()
 
 
