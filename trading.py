@@ -27,17 +27,28 @@ class AjouStock(QMainWindow, form_class):
                                                     # StatusBar 위젯에 서버 연결 상태 및 현재 시간을 출력
 
         self.lineEdit.textChanged.connect(self.code_changed)    # lineEdit 객체가 변경될 때 호출되는 슬롯을 지정
-        self.pushButton.clicked.connect(self.send_order)        # 현금주문
+        self.pushButton_2.clicked.connect(self.send_order)        # 현금주문
 
         accouns_num = int(self.kiwoom.get_login_info("ACCOUNT_CNT"))    # 계좌 정보를 QComboBox 위젯에 출력하는 코드
         accounts = self.kiwoom.get_login_info("ACCNO")                  # 로그인 정보 가져오기
         accounts_list = accounts.split(';')[0:accouns_num]              # 계좌가 여러 개인 경우 각 계좌는';'를 통해 구분
 
         self.comboBox.addItems(accounts_list)
-
-        self.pushButton_2.clicked.connect(self.check_balance)           # 시그널과 슬롯을 연결
+        self.pushButton.clicked.connect(self.check_balance)             # 시그널과 슬롯을 연결
 
         self.load_buy_sell_list()                                       # 선정 종목 리스트 출력
+
+        self.pushButton_7.clicked.connect(self.run_skyrocket)           # 급등주 포착
+        self.pushButton_3.clicked.connect(self.run_skyrocket)
+        self.pushButton_8.clicked.connect(self.run_skyrocket)
+        self.pushButton_9.clicked.connect(self.run_skyrocket)
+        self.pushButton_10.clicked.connect(self.run_skyrocket)
+        self.load_skyrocket()                                           # 급등주 출력
+
+        self.pushButton_4.clicked.connect(self.run_save_csv)            # csv 저장
+
+        self.pushButton_5.clicked.connect(self.run_main_before)         # main before
+        self.pushButton_6.clicked.connect(self.run_main_after)          # main after
 
 
     # 시간 체크 및 서버 연결 상태 확인
@@ -82,7 +93,6 @@ class AjouStock(QMainWindow, form_class):
         price = self.spinBox_2.value()
 
         self.kiwoom.send_order("send_order_req", "0101", account, order_type_lookup[order_type], code, num, price, hoga_lookup[hoga], "")
-# 수동 주문 ----------------------------------------------------------------
 
 
     # 계좌 조회 버튼 클릭 시 (잔고 및 보유종목 호출)
@@ -136,6 +146,7 @@ class AjouStock(QMainWindow, form_class):
             self.check_balance()
 
 
+# buy list, sell list 읽기 ----------------------------------------------------------------
     # buy_list.txt와 sell_list.txt 읽는 함수
     def load_buy_sell_list(self):
         f = open("buy_list.txt", 'rt')
@@ -226,6 +237,75 @@ class AjouStock(QMainWindow, form_class):
         for row_data in sell_list:
             f.write(row_data)
         f.close()
+
+
+# 급등주 포착 ----------------------------------------------------------------
+    # skyrocket.py 실행
+    def run_skyrocket(self):
+        skyrocket_period = self.spinBox_13.value()
+        skyrocket_ratio = self.spinBox_14.value()
+        # TODO
+
+    # skyrocket.txt 불러오기
+    def load_skyrocket(self):
+        f = open("skyrocket_list.txt", 'rt')
+        skyrocket_list = f.readlines()
+        f.close()
+
+        row_count = len(skyrocket_list)
+        self.tableWidget_4.setRowCount(row_count)
+
+        for j in range(len(skyrocket_list)):
+            row_data = skyrocket_list[j]
+            split_row_data = row_data.split(';')
+
+            for i in range(len(split_row_data)):
+                item = QTableWidgetItem(split_row_data[i].rstrip())
+                item.setTextAlignment(Qt.AlignVCenter | Qt.AlignCenter)
+                self.tableWidget_4.setItem(j, i, item)
+
+        self.tableWidget_4.resizeRowsToContents()
+
+
+# 급등주 OHLCV를 csv로 저장 ----------------------------------------------------------------
+    # save_csv.py 실행
+    def run_save_csv(self):
+        csv_start_date = self.dateEdit.value()
+        csv_end_date = self.dateEdit_2.value()
+        # TODO
+
+
+# Main Before 실행 ----------------------------------------------------------------
+    # Main Before 실행
+    def run_main_before(self):
+        before_start_date = self.dateEdit_3.value()
+        before_end_date = self.dateEdit_4.value()
+        before_min_unit = self.spinBox_3.value()
+        before_max_unit = self.spinBox_4.value()
+        before_delayed = self.doubleSpinBox.value()
+        before_learning = self.doubleSpinBox_2.value()
+        before_balance = self.spinBox_7.value()
+        before_epoch = self.spinBox_8.value()
+        before_discount = self.spinBox_9.value()
+        before_epsilon = self.doubleSpinBox_3.value()
+        # TODO
+
+
+# Main After 실행 ----------------------------------------------------------------
+    # Main After 실행
+    def run_main_after(self):
+        after_start_date = self.dateEdit_5.value()
+        after_end_date = self.dateEdit_6.value()
+        after_min_unit = self.spinBox_11.value()
+        after_max_unit = self.spinBox_12.value()
+        # TODO
+
+
+# 진행 상황 ----------------------------------------------------------------
+    #
+    def statusbar(self):
+        pass
+        # TODO
 
 
 if __name__ == "__main__":
