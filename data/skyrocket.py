@@ -13,7 +13,8 @@ df_code.종목코드 = df_code.종목코드.map('{:06d}'.format)
 df_code = df_code[['회사명', '종목코드']]
 df_code = df_code.rename(columns={'회사명': 'name', '종목코드': 'code'})
 # len(df_code)      # 2018.8.2. 기준 2211개
-df_extract = df_code.iloc[100:110,:]
+# df_extract = df_code.iloc[100:110,:]
+df_extract = df_code.iloc[:10]
 
 code_list=[]
 for i in range(len(df_extract)):
@@ -122,7 +123,7 @@ class Skyrocket:
             code = code_list[i]
             df_21 = self.get_volume_df(code)
             print(i, '/', num)
-            sky_boolean, skyrocket_ratio = self.check_skyrocket(df_21, code):
+            sky_boolean, skyrocket_ratio = self.check_skyrocket(df_21, code)
             if sky_boolean == True:
                 print(code, "<------------- SKYROCKET!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                 skyrocket_list.append(code)
@@ -137,7 +138,7 @@ class Skyrocket:
     def update_skyrocket_list(self, skyrocket_list, skyrocket_ratio_list):
         f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/list/skyrocket_list.txt", "wt")
         for i in range(len(skyrocket_list)):
-            f.writelines(skyrocket_list[i] + ";" + skyrocket_ratio_list[i] + "\n")   # 개수는 수정해야 함
+            f.writelines(skyrocket_list[i] + ";" + skyrocket_ratio_list[i] + "%" + "\n")   # 개수는 수정해야 함
         f.close()
 
 
