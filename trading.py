@@ -1,10 +1,12 @@
 # trading.py
 # Kiwoom API를 이용해 실제 트레이딩 하는 모듈
 import sys
-import kiwoom
+import os
+import kiwoom, main_before, main_after, settings, test
+from data import skyrocket, save_csv
+from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import *
-from PyQt5.QtWidgets import *
 from PyQt5.QAxContainer import *
 
 
@@ -38,11 +40,7 @@ class AjouStock(QMainWindow, form_class):
 
         self.load_buy_sell_list()                                       # 선정 종목 리스트 출력
 
-        self.pushButton_7.clicked.connect(self.run_skyrocket)           # 급등주 포착
-        self.pushButton_3.clicked.connect(self.run_skyrocket)
-        self.pushButton_8.clicked.connect(self.run_skyrocket)
-        self.pushButton_9.clicked.connect(self.run_skyrocket)
-        self.pushButton_10.clicked.connect(self.run_skyrocket)
+        self.pushButton_3.clicked.connect(self.run_skyrocket)           # 급등주 포착
         self.load_skyrocket()                                           # 급등주 출력
 
         self.pushButton_4.clicked.connect(self.run_save_csv)            # csv 저장
@@ -93,6 +91,7 @@ class AjouStock(QMainWindow, form_class):
         price = self.spinBox_2.value()
 
         self.kiwoom.send_order("send_order_req", "0101", account, order_type_lookup[order_type], code, num, price, hoga_lookup[hoga], "")
+        QMessageBox.about(self, "수동 주문 완료")
 
 
     # 계좌 조회 버튼 클릭 시 (잔고 및 보유종목 호출)
@@ -138,6 +137,8 @@ class AjouStock(QMainWindow, form_class):
         self.timer2 = QTimer(self)                  # 실시간 조회 체크박스
         self.timer2.start(1000*10)                  # 10초에 한 번
         self.timer2.timeout.connect(self.timeout2)
+
+        QMessageBox.about(self, "계좌 조회 완료")
 
 
     # 실시간 조회 체크박스 확인
@@ -246,6 +247,7 @@ class AjouStock(QMainWindow, form_class):
         skyrocket_ratio = self.spinBox_14.value()
         # TODO
 
+
     # skyrocket.txt 불러오기
     def load_skyrocket(self):
         f = open("skyrocket_list.txt", 'rt')
@@ -270,15 +272,14 @@ class AjouStock(QMainWindow, form_class):
 # 급등주 OHLCV를 csv로 저장 ----------------------------------------------------------------
     # save_csv.py 실행
     def run_save_csv(self):
-        csv_start_date = self.dateEdit.value()
-        csv_end_date = self.dateEdit_2.value()
-        # TODO
+        # save_csv.save_csv_run()
+        test.TEST()
+        QMessageBox.about(self, "급등한 종목의 OHLCV를 csv로 저장 완료")
 
 
 # Main Before 실행 ----------------------------------------------------------------
     # Main Before 실행
     def run_main_before(self):
-        before_start_date = self.dateEdit_3.value()
         before_end_date = self.dateEdit_4.value()
         before_min_unit = self.spinBox_3.value()
         before_max_unit = self.spinBox_4.value()
@@ -286,19 +287,18 @@ class AjouStock(QMainWindow, form_class):
         before_learning = self.doubleSpinBox_2.value()
         before_balance = self.spinBox_7.value()
         before_epoch = self.spinBox_8.value()
-        before_discount = self.spinBox_9.value()
         before_epsilon = self.doubleSpinBox_3.value()
         # TODO
-
+        QMessageBox.about(self, "강화학습 모델 생성 완료")
 
 # Main After 실행 ----------------------------------------------------------------
     # Main After 실행
     def run_main_after(self):
-        after_start_date = self.dateEdit_5.value()
-        after_end_date = self.dateEdit_6.value()
+        after_start_date = self.dateEdit_5.text()
         after_min_unit = self.spinBox_11.value()
         after_max_unit = self.spinBox_12.value()
-        # TODO
+        main_after.main_after_run(after_start_date, after_min_unit, after_max_unit)
+        QMessageBox.about(self, "시뮬레이션 실행 완료")
 
 
 # 진행 상황 ----------------------------------------------------------------
