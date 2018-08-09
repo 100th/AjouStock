@@ -272,8 +272,8 @@ class AjouStock(QMainWindow, form_class):
 # 급등주 OHLCV를 csv로 저장 ----------------------------------------------------------------
     # save_csv.py 실행
     def run_save_csv(self):
-        # save_csv.save_csv_run()
-        test.TEST()
+        csv_start_date = self.dateEdit.text()
+        save_csv.save_csv_run(csv_start_date)
         QMessageBox.about(self, "급등한 종목의 OHLCV를 csv로 저장 완료")
 
 

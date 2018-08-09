@@ -36,7 +36,7 @@ def parsing(code, page):
 
 
 # save_csv 실행 함수
-def save_csv_run():
+def save_csv_run(csv_start_date):
     code_list = load_skyrocket_list()
 
     for i in range(len(code_list)):
@@ -53,7 +53,7 @@ def save_csv_run():
         pg_last = int(pg_last)
 
         # 시작일과 종료일
-        start_date = datetime.datetime.strftime(datetime.datetime(year=2017, month=1, day=1), '%Y.%m.%d')
+        start_date = csv_start_date
         end_date = datetime.datetime.strftime(datetime.datetime.today(), '%Y.%m.%d')
 
         # 페이지 확인
