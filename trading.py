@@ -2,7 +2,7 @@
 # Kiwoom API를 이용해 실제 트레이딩 하는 모듈
 import sys
 import os
-import kiwoom, main_before, main_after, settings, test
+import kiwoom, main_before, main_after, settings
 from data import skyrocket, save_csv
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -40,7 +40,7 @@ class AjouStock(QMainWindow, form_class):
 
         self.load_buy_sell_list()                                       # 선정 종목 리스트 출력
 
-        self.pushButton_3.clicked.connect(self.run_skyrocket)           # 급등주 포착
+        self.pushButton_3.clicked.connect(self.run_skyrocket)           # 급등주 알고리즘 실행
         self.load_skyrocket()                                           # 급등주 출력
 
         self.pushButton_4.clicked.connect(self.run_save_csv)            # csv 저장
@@ -245,7 +245,9 @@ class AjouStock(QMainWindow, form_class):
     def run_skyrocket(self):
         skyrocket_period = self.spinBox_13.value()
         skyrocket_ratio = self.spinBox_14.value()
-        # TODO
+        skyrocket_idx = self.comboBox_4.currentText()
+        skyrocket.skyrocket_run(skyrocket_period, skyrocket_ratio, skyrocket_idx)
+        QMessageBox.about(self, "해당 인덱스 번호의 급등주 탐색 완료")
 
 
     # skyrocket.txt 불러오기
