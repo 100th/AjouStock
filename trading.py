@@ -244,9 +244,9 @@ class AjouStock(QMainWindow, form_class):
     # skyrocket.py 실행
     def run_skyrocket(self):
         skyrocket_period = self.spinBox_13.value()
-        skyrocket_ratio = self.spinBox_14.value()
+        skyrocket_criteria = self.spinBox_14.value()
         skyrocket_idx = self.comboBox_4.currentText()
-        skyrocket.skyrocket_run(skyrocket_period, skyrocket_ratio, skyrocket_idx)
+        skyrocket.skyrocket_run(skyrocket_period, skyrocket_criteria, skyrocket_idx)
         QMessageBox.about(self, "해당 인덱스 번호의 급등주 탐색 완료")
 
 
