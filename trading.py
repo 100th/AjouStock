@@ -277,10 +277,11 @@ class AjouStock(QMainWindow, form_class):
         QMessageBox.about(self, "급등한 종목의 OHLCV를 csv로 저장 완료")
 
 
-# Main Before 실행 ----------------------------------------------------------------
+# Main 실행 ----------------------------------------------------------------
     # Main Before 실행
     def run_main_before(self):
-        before_end_date = self.dateEdit_4.value()
+        before_start_date = self.dateEdit.text()
+        before_end_date = self.dateEdit_4.text()
         before_min_unit = self.spinBox_3.value()
         before_max_unit = self.spinBox_4.value()
         before_delayed = self.doubleSpinBox.value()
@@ -288,10 +289,12 @@ class AjouStock(QMainWindow, form_class):
         before_balance = self.spinBox_7.value()
         before_epoch = self.spinBox_8.value()
         before_epsilon = self.doubleSpinBox_3.value()
-        # TODO
+        main_before.main_before_run(before_start_date, before_end_date, before_min_unit,
+                        before_max_unit, before_delayed, before_learning, before_balance,
+                        before_epoch, before_epsilon)
         QMessageBox.about(self, "강화학습 모델 생성 완료")
 
-# Main After 실행 ----------------------------------------------------------------
+
     # Main After 실행
     def run_main_after(self):
         after_start_date = self.dateEdit_5.text()
