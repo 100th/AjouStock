@@ -1,5 +1,5 @@
 # AjouStock
-> Stock trading project using Tensorflow(or Keras) with Python
+> Stock trading project using Keras with Python
 
 ## About
 > Not yet
@@ -7,6 +7,7 @@
 ## Development Environment
 - Windows 10 64bit
 - Python 3.6
+- Anaconda 32bit
 - 키움증권 Open API+
 
 ## Requirements
@@ -15,6 +16,7 @@
 - numPy
 - pandas
 - matplotlib
+- mpl-finance
 - pyqt5
 - traceback
 - requests
@@ -24,5 +26,8 @@
 ## Plan
 > Not yet
 
+## GUI
+![gui](/image/v0.1.png)
+
 ## Tree Graph
-> Not yet
+![tree](/image/tree-graph.png)
