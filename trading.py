@@ -1,10 +1,10 @@
 # trading.py
 # Kiwoom API를 이용해 실제 트레이딩 하는 모듈
+# 32비트의 파이썬, 아나콘다 환경에서 실행 가능
 import sys
 import os
-import main_before, main_after, settings
-from Kiwoom import Kiwoom
-from data import skyrocket, save_csv
+import settings
+from kiwoom import Kiwoom
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 from PyQt5.QtCore import *
@@ -40,14 +40,6 @@ class AjouStock(QMainWindow, form_class):
         self.pushButton.clicked.connect(self.check_balance)             # 시그널과 슬롯을 연결
 
         self.load_buy_sell_list()                                       # 선정 종목 리스트 출력
-
-        self.pushButton_3.clicked.connect(self.run_skyrocket)           # 급등주 알고리즘 실행
-        self.load_skyrocket()                                           # 급등주 출력
-
-        self.pushButton_4.clicked.connect(self.run_save_csv)            # csv 저장
-
-        self.pushButton_5.clicked.connect(self.run_main_before)         # main before
-        self.pushButton_6.clicked.connect(self.run_main_after)          # main after
 
 
     # 시간 체크 및 서버 연결 상태 확인
@@ -92,7 +84,6 @@ class AjouStock(QMainWindow, form_class):
         price = self.spinBox_2.value()
 
         self.kiwoom.send_order("send_order_req", "0101", account, order_type_lookup[order_type], code, num, price, hoga_lookup[hoga], "")
-        QMessageBox.about(self, "수동 주문 완료")
 
 
     # 계좌 조회 버튼 클릭 시 (잔고 및 보유종목 호출)
@@ -139,8 +130,6 @@ class AjouStock(QMainWindow, form_class):
         self.timer2.start(1000*10)                  # 10초에 한 번
         self.timer2.timeout.connect(self.timeout2)
 
-        QMessageBox.about(self, "계좌 조회 완료")
-
 
     # 실시간 조회 체크박스 확인
     def timeout2(self):
@@ -151,11 +140,11 @@ class AjouStock(QMainWindow, form_class):
 # buy list, sell list 읽기 ----------------------------------------------------------------
     # buy_list.txt와 sell_list.txt 읽는 함수
     def load_buy_sell_list(self):
-        f = open("buy_list.txt", 'rt')
+        f = open(os.path.join(settings.BASE_DIR, "data/list/buy_list.txt"), 'rt')
         buy_list = f.readlines()
         f.close()
 
-        f = open("sell_list.txt", 'rt')
+        f = open(os.path.join(settings.BASE_DIR, "data/list/sell_list.txt"), 'rt')
         sell_list = f.readlines()
         f.close()
 
@@ -191,11 +180,11 @@ class AjouStock(QMainWindow, form_class):
     def trade_stocks(self):
         hoga_lookup = {'limits': "00", 'market': "03"}
 
-        f = open("buy_list.txt", 'rt')
+        f = open(os.path.join(settings.BASE_DIR, "data/list/buy_list.txt"), 'rt')
         buy_list = f.readlines()
         f.close()
 
-        f = open("sell_list.txt", 'rt')
+        f = open(os.path.join(settings.BASE_DIR, "data/list/sell_list.txt"), 'rt')
         sell_list = f.readlines()
         f.close()
 
@@ -227,7 +216,7 @@ class AjouStock(QMainWindow, form_class):
         for i, row_data in enumerate(buy_list):
             buy_list[i] = buy_list[i].replace("before", "complete")
 
-        f = open("buy_list.txt", 'wt')
+        f = open(os.path.join(settings.BASE_DIR, "data/list/buy_list.txt"), 'wt')
         for row_data in buy_list:
             f.write(row_data)
         f.close()
@@ -235,83 +224,10 @@ class AjouStock(QMainWindow, form_class):
         for i, row_data in enumerate(sell_list):
             sell_list[i] = sell_list[i].replace("before", "complete")
 
-        f = open("sell_list.txt", 'wt')
+        f = open(os.path.join(settings.BASE_DIR, "data/list/sell_list.txt"), 'wt')
         for row_data in sell_list:
             f.write(row_data)
         f.close()
-
-
-# 급등주 포착 ----------------------------------------------------------------
-    # skyrocket.py 실행
-    def run_skyrocket(self):
-        skyrocket_period = self.spinBox_13.value()
-        skyrocket_criteria = self.spinBox_14.value()
-        skyrocket_idx = self.comboBox_4.currentText()
-        skyrocket.skyrocket_run(skyrocket_period, skyrocket_criteria, skyrocket_idx)
-        QMessageBox.about(self, "해당 인덱스 번호의 급등주 탐색 완료")
-
-
-    # skyrocket.txt 불러오기
-    def load_skyrocket(self):
-        f = open("skyrocket_list.txt", 'rt')
-        skyrocket_list = f.readlines()
-        f.close()
-
-        row_count = len(skyrocket_list)
-        self.tableWidget_4.setRowCount(row_count)
-
-        for j in range(len(skyrocket_list)):
-            row_data = skyrocket_list[j]
-            split_row_data = row_data.split(';')
-
-            for i in range(len(split_row_data)):
-                item = QTableWidgetItem(split_row_data[i].rstrip())
-                item.setTextAlignment(Qt.AlignVCenter | Qt.AlignCenter)
-                self.tableWidget_4.setItem(j, i, item)
-
-        self.tableWidget_4.resizeRowsToContents()
-
-
-# 급등주 OHLCV를 csv로 저장 ----------------------------------------------------------------
-    # save_csv.py 실행
-    def run_save_csv(self):
-        csv_start_date = self.dateEdit.text()
-        save_csv.save_csv_run(csv_start_date)
-        QMessageBox.about(self, "급등한 종목의 OHLCV를 csv로 저장 완료")
-
-
-# Main 실행 ----------------------------------------------------------------
-    # Main Before 실행
-    def run_main_before(self):
-        before_start_date = self.dateEdit.text()
-        before_end_date = self.dateEdit_4.text()
-        before_min_unit = self.spinBox_3.value()
-        before_max_unit = self.spinBox_4.value()
-        before_delayed = self.doubleSpinBox.value()
-        before_learning = self.doubleSpinBox_2.value()
-        before_balance = self.spinBox_7.value()
-        before_epoch = self.spinBox_8.value()
-        before_epsilon = self.doubleSpinBox_3.value()
-        main_before.main_before_run(before_start_date, before_end_date, before_min_unit,
-                        before_max_unit, before_delayed, before_learning, before_balance,
-                        before_epoch, before_epsilon)
-        QMessageBox.about(self, "강화학습 모델 생성 완료")
-
-
-    # Main After 실행
-    def run_main_after(self):
-        after_start_date = self.dateEdit_5.text()
-        after_min_unit = self.spinBox_11.value()
-        after_max_unit = self.spinBox_12.value()
-        main_after.main_after_run(after_start_date, after_min_unit, after_max_unit)
-        QMessageBox.about(self, "시뮬레이션 실행 완료")
-
-
-# 진행 상황 ----------------------------------------------------------------
-    #
-    def statusbar(self):
-        pass
-        # TODO
 
 
 if __name__ == "__main__":
