@@ -44,3 +44,7 @@ result/logs/001040/001040_20180803141849.log
 *.pyc
 __pycache__/learner.cpython-36.pyc
 __pycache__/settings.cpython-36.pyc
+*.pyc
+*.xml
+*.pyc
+*.iml
