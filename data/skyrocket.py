@@ -131,7 +131,7 @@ def check_skyrocket(extracted_df, code, skyrocket_period, skyrocket_criteria):
         skyrocket_ratio = round(today_vol / avg_vol * 100, 2)
         print(skyrocket_ratio, "<-------------- %")
         return True, skyrocket_ratio
-        
+
     else:
         print(today_vol, "<-------------- The volume of TODAY")
         print(int(avg_vol), "<-------------- The volume of AVERAGE for selected days")
@@ -142,7 +142,7 @@ def check_skyrocket(extracted_df, code, skyrocket_period, skyrocket_criteria):
 
 # 만약 skyrocket_idx가 0000 ~ 0499라면
 def update_skyrocket_list_first(skyrocket_list, skyrocket_ratio_list):
-    f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/list/skyrocket_list.txt", "wt") # 지우고 새로 쓴다
+    f = open("data/list/skyrocket_list.txt", "wt") # 지우고 새로 쓴다
     for i in range(len(skyrocket_list)):
         f.writelines(skyrocket_list[i] + ";" + skyrocket_ratio_list[i] + "%" + "\n")
     f.close()
@@ -150,7 +150,7 @@ def update_skyrocket_list_first(skyrocket_list, skyrocket_ratio_list):
 
 # 만약 skyrocket_idx가 0000 ~ 0499가 아니라 나머지라면
 def update_skyrocket_list_rest(skyrocket_list, skyrocket_ratio_list):
-    f = open("C:/Users/B-dragon90/Desktop/Github/AjouStock/data/list/skyrocket_list.txt", "a+t") # 맨 뒤에 이어쓴다 (추가)
+    f = open("data/list/skyrocket_list.txt", "a+t") # 맨 뒤에 이어쓴다 (추가)
     for i in range(len(skyrocket_list)):
         f.writelines("\n" + skyrocket_list[i] + ";" + skyrocket_ratio_list[i] + "%" + "\n")
     f.close()

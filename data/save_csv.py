@@ -10,7 +10,7 @@ from bs4 import BeautifulSoup as bs
 
 # skyrocket_list.txt 불러와서 어떤 종목을 매매할지 code_list로 만듦
 def load_skyrocket_list():
-    f = open("/Users/B-dragon90/Desktop/Github/AjouStock/data/list/skyrocket_list.txt", 'rt')
+    f = open("data/list/skyrocket_list.txt", 'rt')
     skyrocket_list = f.readlines()
     f.close()
     code_list = []
@@ -79,7 +79,7 @@ def save_csv_run(csv_start_date):
         # ohlcv_edit.head()
 
         # CSV 파일로 저장
-        folder = 'C:/Users/B-dragon90/Desktop/Github/AjouStock/data/csv_data'
+        folder = 'data/csv_data'
         if not os.path.exists(folder):
             os.makedirs(folder)
         path = os.path.join(folder, '{code}.csv'.format(code=code))

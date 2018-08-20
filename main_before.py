@@ -13,7 +13,7 @@ def main_before_run(before_start_date, before_end_date, before_min_unit,
                     before_max_unit, before_delayed, before_learning,
                     before_balance, before_epoch, before_epsilon):
     if __name__ == '__main__':
-        code_list = save_csv.load_buy_list()
+        code_list = save_csv.load_skyrocket_list()
 
         for i in range(len(code_list)):
             stock_code = code_list[i]
