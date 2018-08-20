@@ -45,8 +45,14 @@ result/logs/001040/001040_20180803141849.log
 __pycache__/learner.cpython-36.pyc
 __pycache__/settings.cpython-36.pyc
 *.pyc
+<<<<<<< HEAD
+*.pyc
+*.pyc
+=======
 *.xml
 *.pyc
 *.iml
 image/tree-graph.psd
 image/tree-graph.psd
+>>>>>>> 5623a083ea6ab0f0cf3463980b8c9f7bc1fc47f8
+*.pyc

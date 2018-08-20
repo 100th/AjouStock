@@ -186,16 +186,19 @@ class Kiwoom(QAxWidget):
         total_eval_price = self._comm_get_data(trcode, "", rqname, 0, "총평가금액")
         total_eval_profit_loss_price = self._comm_get_data(trcode, "", rqname, 0, "총평가손익금액")
         total_earning_rate = self._comm_get_data(trcode, "", rqname, 0, "총수익률(%)") #실 서버 용
-        total_earning_rate = Kiwoom.change_format(total_earning_rate) #모의 서버 용
         estimated_deposit = self._comm_get_data(trcode, "", rqname, 0, "추정예탁자산")
 
-        if self.get_server_gubun(): #실 서버와 모의 서버 구분
-            total_earning_rate = float(total_earning_rate) / 100
-            total_earning_rate = str(total_earning_rate)
         self.opw00018_output['single'].append(total_earning_rate)
         self.opw00018_output['single'].append(Kiwoom.change_format(total_purchase_price))
         self.opw00018_output['single'].append(Kiwoom.change_format(total_eval_price))
         self.opw00018_output['single'].append(Kiwoom.change_format(total_eval_profit_loss_price))
+
+        total_earning_rate = Kiwoom.change_format(total_earning_rate) #모의 서버 용
+
+        # if self.get_server_gubun(): #실 서버와 모의 서버 구분
+        #     total_earning_rate = float(total_earning_rate) / 100
+        #     total_earning_rate = str(total_earning_rate)
+
         self.opw00018_output['single'].append(total_earning_rate)
         self.opw00018_output['single'].append(Kiwoom.change_format(estimated_deposit))
 
@@ -223,10 +226,10 @@ class Kiwoom(QAxWidget):
         self.opw00018_output = {'single': [], 'multi': []}
 
 
-    #실 서버로 접속할 때와 모의투자 서버로 접속할 때 제공되는 데이터 형식이 다르기에. 실 서버는 수익률이 소수점 없이
-    def get_server_gubun(self):
-        ret = self.dynamicCall("KOA_Functions(QString, QString)", "GetServerGubun", "")
-        return ret
+    # #실 서버로 접속할 때와 모의투자 서버로 접속할 때 제공되는 데이터 형식이 다르기에. 실 서버는 수익률이 소수점 없이
+    # def get_server_gubun(self):
+    #     ret = self.dynamicCall("KOA_Functions(QString, QString)", "GetServerGubun", "")
+    #     return ret
 
 
 """
@@ -236,13 +239,13 @@ if __name__ == "__main__":
     kiwoom = Kiwoom()
     kiwoom.comm_connect()
 
-    kiwoom.set_input_value("계좌번호", "xxxxxxxxxx")
-    kiwoom.set_input_value("비밀번호", "0000")
+    kiwoom.set_input_value("계좌번호", "xxxxxxxxx")
+    kiwoom.set_input_value("비밀번호", "xxxxx")
     kiwoom.comm_rq_data("opw00001_req", "opw00001", 0, "2000")
 
     print(kiwoom.d2_deposit)
-"""
-"""
+
+
 #'계좌정보' 잘 얻어오는지 확인
 if __name__ == "__main__":
     app = QApplication(sys.argv)
