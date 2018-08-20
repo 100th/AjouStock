@@ -12,7 +12,7 @@ from PyQt5.QAxContainer import *
 
 
 form_class = uic.loadUiType("AjouStock.ui")[0]
-# os.getcwd()
+os.getcwd()
 
 class AjouStock(QMainWindow, form_class):
     def __init__(self):
