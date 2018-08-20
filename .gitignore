@@ -55,3 +55,4 @@ __pycache__/settings.cpython-36.pyc
 image/tree-graph.psd
 image/tree-graph.psd
 >>>>>>> 5623a083ea6ab0f0cf3463980b8c9f7bc1fc47f8
+*.pyc
