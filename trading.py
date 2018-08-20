@@ -2,7 +2,8 @@
 # Kiwoom API를 이용해 실제 트레이딩 하는 모듈
 import sys
 import os
-import kiwoom, main_before, main_after, settings
+import main_before, main_after, settings
+from Kiwoom import Kiwoom
 from data import skyrocket, save_csv
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
@@ -11,7 +12,7 @@ from PyQt5.QAxContainer import *
 
 
 form_class = uic.loadUiType("AjouStock.ui")[0]
-
+# os.getcwd()
 
 class AjouStock(QMainWindow, form_class):
     def __init__(self):
