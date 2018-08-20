@@ -80,7 +80,7 @@ def save_csv_run(csv_start_date):
         # ohlcv_edit.head()
 
         # CSV 파일로 저장
-        folder = os.path.join(settings.BASE_DIR, "data/list/skyrocket_list.txt")
+        folder = os.path.join(settings.BASE_DIR, "data/csv_data")
         if not os.path.exists(folder):
             os.makedirs(folder)
         path = os.path.join(folder, '{code}.csv'.format(code=code))
