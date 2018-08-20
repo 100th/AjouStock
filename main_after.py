@@ -11,7 +11,7 @@ from learner import Learner
 
 def main_after_run(after_start_date, after_min_unit, after_max_unit):
     if __name__ == '__main__':
-        code_list = save_csv.load_buy_list()
+        code_list = save_csv.load_skyrocket_list()
 
         min_trading_unit_buy_list = []
         min_trading_unit_sell_list = []
