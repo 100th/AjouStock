@@ -82,12 +82,12 @@ def main_after_run(after_start_date, after_min_unit, after_max_unit):
                     code_list_sell.append(stock_code)
 
         # buy_list.txt와 sell_list.txt로 저장
-        b_list = open("data/list/buy_list.txt", "wt")
+        b_list = open(os.path.join(settings.BASE_DIR, "data/list/buy_list.txt"), "wt")
         for i in range(len(code_list_buy)):
             b_list.writelines("buy;" + code_list_buy[i] + ";market;" + min_trading_unit_buy_list[i] + ";0;before\n")
         b_list.close()
 
-        s_list = open("data/list/sell_list.txt", "wt")
+        s_list = open(os.path.join(settings.BASE_DIR, "data/list/sell_list.txt"), "wt")
         for i in range(len(code_list_sell)):
             s_list.writelines("sell;" + code_list_sell[i] + ";market;" + min_trading_unit_sell_list[i] + ";0;before\n")
         s_list.close()

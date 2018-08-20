@@ -4,6 +4,7 @@ import time
 import datetime
 import requests
 import traceback
+import settings
 import pandas as pd
 from bs4 import BeautifulSoup as bs
 
@@ -142,7 +143,7 @@ def check_skyrocket(extracted_df, code, skyrocket_period, skyrocket_criteria):
 
 # 만약 skyrocket_idx가 0000 ~ 0499라면
 def update_skyrocket_list_first(skyrocket_list, skyrocket_ratio_list):
-    f = open("data/list/skyrocket_list.txt", "wt") # 지우고 새로 쓴다
+    f = open(os.path.join(settings.BASE_DIR, "data/list/skyrocket_list.txt"), "wt") # 지우고 새로 쓴다
     for i in range(len(skyrocket_list)):
         f.writelines(skyrocket_list[i] + ";" + skyrocket_ratio_list[i] + "%" + "\n")
     f.close()
@@ -150,7 +151,7 @@ def update_skyrocket_list_first(skyrocket_list, skyrocket_ratio_list):
 
 # 만약 skyrocket_idx가 0000 ~ 0499가 아니라 나머지라면
 def update_skyrocket_list_rest(skyrocket_list, skyrocket_ratio_list):
-    f = open("data/list/skyrocket_list.txt", "a+t") # 맨 뒤에 이어쓴다 (추가)
+    f = open(os.path.join(settings.BASE_DIR, "data/list/skyrocket_list.txt"), "a+t") # 맨 뒤에 이어쓴다 (추가)
     for i in range(len(skyrocket_list)):
         f.writelines("\n" + skyrocket_list[i] + ";" + skyrocket_ratio_list[i] + "%" + "\n")
     f.close()
