@@ -1,1 +1,1 @@
-buy;035720;market;10;0;before
+buy;005930;market;2;0;before
