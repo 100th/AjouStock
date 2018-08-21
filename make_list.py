@@ -35,6 +35,8 @@ class AjouStock(QMainWindow, form_class):
         skyrocket_criteria = self.spinBox_14.value()
         skyrocket_idx = self.comboBox_4.currentText()
         skyrocket.skyrocket_run(skyrocket_period, skyrocket_criteria, skyrocket_idx)
+        # contents = skyrocket.skyrocket_log()
+        # self.statusbar("Loading...")
 
 
     # skyrocket.txt 불러오기
@@ -91,10 +93,20 @@ class AjouStock(QMainWindow, form_class):
 
 
 # 진행 상황 ----------------------------------------------------------------
-    #
-    def statusbar(self):
-        pass
-        # TODO
+    # 강화학습 진행 로그 나타내는 함수
+    def reinforcementLog(self, contents):
+        item = QListWidgetItem(contents)
+        self.listWidget_2.addItem(item)
+        self.listWidget_2.scrollToBottom()
+
+
+    # 급등주 포착, CSV 저장의 진행 상황 나타내는 함수
+    def statusbar(self, contents, color="black"):
+        currentTime = datetime.now().strftime("%H:%M:%S ")
+        item = QListWidgetItem(currentTime + contents)
+        item.setForeground(QColor(color))
+        self.listWidget.addItem(item)
+        self.listWidget.scrollToBottom()
 
 
 if __name__ == "__main__":
