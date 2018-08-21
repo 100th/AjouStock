@@ -54,14 +54,14 @@ def save_csv_run(csv_start_date):
         pg_last = int(pg_last)
 
         # 시작일과 종료일
-        start_date = csv_start_date
+        start_date = csv_start_date.replace("-", ".")
         end_date = datetime.datetime.strftime(datetime.datetime.today(), '%Y.%m.%d')
 
         # 페이지 확인
         ohlcv = None
         for page in range(1, pg_last+1):
             dataframe = parsing(code, page)
-            dataframe_filtered = dataframe[dataframe['날짜'] > start_date]
+            dataframe_filtered = dataframe[dataframe['날짜'] >= start_date]
             if ohlcv is None:
                 ohlcv = dataframe_filtered
             else:
