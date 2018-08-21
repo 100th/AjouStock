@@ -59,6 +59,9 @@ class Visualizer:
             self.axes[2].axvline(idx, color=color, alpha=0.1)
         styles = ['.r', '.b']
         for action, style in zip(action_list, styles):
+            if len(outvals) == 0:
+                print("----------------ERROR-----------------")
+                continue
             self.axes[2].plot(x, outvals[:, action], style)
 
 # 차트 4. 포트폴리오 가치

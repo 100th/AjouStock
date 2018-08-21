@@ -16,6 +16,8 @@ def load_skyrocket_list():
     f.close()
     code_list = []
     for item in skyrocket_list:
+        if item =='\n':
+            break
         split_row_data = item.split(';')
         code_list.append(split_row_data[0])
     return code_list

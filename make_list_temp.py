@@ -11,7 +11,7 @@ from data import skyrocket, save_csv
 # skyrocket.py 실행
 def run_skyrocket():
     skyrocket_period = 21
-    skyrocket_criteria = 2
+    skyrocket_criteria = 5
     skyrocket_idx = '0000 ~ 0499'
     # skyrocket_idx = '0500 ~ 0999'
     # skyrocket_idx = '1000 ~ 1499'
@@ -23,21 +23,21 @@ def run_skyrocket():
 # 급등주 OHLCV를 csv로 저장 ----------------------------------------------------------------
 # save_csv.py 실행
 def run_save_csv():
-    csv_start_date = '2018-01-01'
+    csv_start_date = '2018-05-01'
     save_csv.save_csv_run(csv_start_date)
 
 
 # Main 실행 ----------------------------------------------------------------
 # Main Before 실행
 def run_main_before():
-    before_start_date = '2018-01-01'
-    before_end_date = '2018-04-01'
+    before_start_date = '2018-06-01'
+    before_end_date = '2018-07-01'
     before_min_unit = 1
     before_max_unit = 2
     before_delayed = 0.2
     before_learning = 0.001
-    before_balance = 100000000
-    before_epoch = 500
+    before_balance = 10000000
+    before_epoch = 10
     before_epsilon = 0.5
     main_before.main_before_run(before_start_date, before_end_date, before_min_unit,
                     before_max_unit, before_delayed, before_learning, before_balance,
@@ -53,7 +53,7 @@ def run_main_after():
 
 
 
+# run_skyrocket()
 # run_save_csv()
-run_skyrocket()
-# run_main_before()
+run_main_before()
 # run_main_after()
