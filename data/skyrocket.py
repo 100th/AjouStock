@@ -131,14 +131,16 @@ def check_skyrocket(extracted_df, code, skyrocket_period, skyrocket_criteria):
         print(int(avg_vol), "<-------------- The volume of AVERAGE for selected days")
         skyrocket_ratio = round(today_vol / avg_vol * 100, 2)
         print(skyrocket_ratio, "<-------------- %")
-        return True, skyrocket_ratio
+        sky_boolean = True
+        return sky_boolean, skyrocket_ratio
 
     else:
         print(today_vol, "<-------------- The volume of TODAY")
         print(int(avg_vol), "<-------------- The volume of AVERAGE for selected days")
         skyrocket_ratio = round(today_vol / avg_vol * 100, 2)
         print(skyrocket_ratio, "<-------------- %")
-        return False, skyrocket_ratio
+        sky_boolean = False
+        return sky_boolean, skyrocket_ratio
 
 
 # 만약 skyrocket_idx가 0000 ~ 0499라면
