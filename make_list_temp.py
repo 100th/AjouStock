@@ -1,6 +1,7 @@
-# make_list.py
+# make_list_temp.py
 # Main 모듈을 통해 매매 리스트 생성. skyrocket과 save_csv 모듈 데이터 수정 가능.
-# 64비트의 파이썬, 아나콘다 환경에서 실행 가능
+# 64비트의 파이썬, 아나콘다 환경에서 실행 가능.
+# Pyqt5 GUI와 연결하지 않고 실행하는 파일.
 import sys
 import os
 import main_before, main_after, settings
