@@ -1,5 +1,5 @@
 # AjouStock
-> Stock trading project using Keras with Python
+> 강화학습과 딥러닝을 이용한 주식 자동매매 프로그램
 
 ## About
 > 강화학습과 딥러닝을 이용한 주식 자동매매 프로그램입니다. Data 모듈에서 급등주 포착 알고리즘을 통해 종목을 추천한 후, 선정된 종목의 OHLCV 데이터를 크롤링하여 CSV 파일로 저장합니다. Learning 모듈에서 초기에는 임의로 투자하여 수익이 발생했을 경우에 +1점을 부여하고, 손실이 발생했을 때에는 -1점을 부여하여 딥러닝과 강화학습으로 더 나은 방향으로 학습시킵니다. Supportment 모듈에서는 키움증권 HTS와 API를 통해 원하는 데이터를 요청합니다. Main 모듈에서는 학습한 투자 모델을 바탕으로 실제 트레이딩을 진행하며, 신경망 모델을 만듭니다.
@@ -31,10 +31,10 @@
 > 2018.7.2. ~ 2018.8.24.
 
 ## GUI
-![gui](/image/v0.1.png)
+![gui](/image/v0.2.png)
 
 ## Tree Graph
-![tree](/image/tree-graph2.png)
+![tree](/image/tree-graph3.png)
 
 ### Data
 - Data management : chart_data와 training_data를 생성하는 모듈
